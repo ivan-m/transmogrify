@@ -28,6 +28,18 @@ transmogrify = fromRaw . toRaw
 class (RawShape a, RawShape b, Raw a ~ Raw b) => SameShape a b
 instance (RawShape a, RawShape b, Raw a ~ Raw b) => SameShape a b
 
+cons :: (SameShape (a, b) c) => a -> b -> c
+cons a = transmogrify . (,) a
+
+snoc :: (SameShape (a, b) c) => a -> b -> c
+snoc = cons
+
+uncons :: (SameShape c (a, b)) => c -> (a, b)
+uncons = transmogrify
+
+unsnoc :: (SameShape c (a, b)) => c -> (a, b)
+unsnoc = uncons
+
 --------------------------------------------------------------------------------
 
 class RawShape' a (r :: Bool) where
