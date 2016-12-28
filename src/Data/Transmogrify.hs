@@ -63,6 +63,7 @@ type family CanRecurse a :: Bool where
   CanRecurse Word64  = 'False
   CanRecurse Float   = 'False
   CanRecurse Double  = 'False
+  CanRecurse Char    = 'False
   CanRecurse a       = 'True
 
 instance (Generic a, GRawShape (Rep a)) => RawShape' a 'True where
